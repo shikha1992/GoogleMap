@@ -1,5 +1,6 @@
 package google.demo.com.googlemap;
 
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +14,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -45,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     address_current = gps.address(lat, longitude);
 
                     mapFragment.getMapAsync(MapsActivity.this);
+
                     Toast.makeText(getApplicationContext(), "Your Lat is : " + lat + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                 } else {
                     gps.showSettingsAlert();
@@ -62,6 +66,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng get_lat_long = new LatLng(lat, longitude);
         mMap.addMarker(new MarkerOptions().position(get_lat_long).title(address_current));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom((get_lat_long), 12.0f));
+        //////////draw route between two points
+        Polyline line = mMap.addPolyline(new PolylineOptions()
+                .add(new LatLng(lat, longitude), new LatLng(19.0180, 72.8448))
+                .width(5)
+                .color(Color.RED));
 
     }
 
