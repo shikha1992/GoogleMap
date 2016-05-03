@@ -71,6 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .add(new LatLng(lat, longitude), new LatLng(19.0180, 72.8448))
                 .width(5)
                 .color(Color.RED));
+        ///
 
     }
 
